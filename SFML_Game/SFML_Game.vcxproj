@@ -19,42 +19,42 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AIInputComponent.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Civilization.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameEntity.cpp" />
-    <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="InputComponent.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapLoader.cpp" />
-    <ClCompile Include="NPC.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Quadtree.cpp" />
-    <ClCompile Include="RenderComponent.cpp" />
-    <ClCompile Include="World.cpp" />
+    <ClInclude Include="include\AIInputComponent.h" />
+    <ClInclude Include="include\Camera.h" />
+    <ClInclude Include="include\Civilization.h" />
+    <ClInclude Include="include\Command.h" />
+    <ClInclude Include="include\Component.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GameEntity.h" />
+    <ClInclude Include="include\Graphics.h" />
+    <ClInclude Include="include\Input.h" />
+    <ClInclude Include="include\InputComponent.h" />
+    <ClInclude Include="include\Map.h" />
+    <ClInclude Include="include\MapLoader.h" />
+    <ClInclude Include="include\NPC.h" />
+    <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\Quadtree.h" />
+    <ClInclude Include="include\RenderComponent.h" />
+    <ClInclude Include="include\stdafx.h" />
+    <ClInclude Include="include\World.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AIInputComponent.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Civilization.h" />
-    <ClInclude Include="Command.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameEntity.h" />
-    <ClInclude Include="Graphics.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="InputComponent.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="MapLoader.h" />
-    <ClInclude Include="NPC.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Quadtree.h" />
-    <ClInclude Include="RenderComponent.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="World.h" />
+    <ClCompile Include="src\AIInputComponent.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Civilization.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameEntity.cpp" />
+    <ClCompile Include="src\Graphics.cpp" />
+    <ClCompile Include="src\Input.cpp" />
+    <ClCompile Include="src\InputComponent.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Map.cpp" />
+    <ClCompile Include="src\MapLoader.cpp" />
+    <ClCompile Include="src\NPC.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Quadtree.cpp" />
+    <ClCompile Include="src\RenderComponent.cpp" />
+    <ClCompile Include="src\World.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{378E61AB-DAC5-4682-A629-6D04CB60F7B8}</ProjectGuid>
@@ -112,7 +112,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Libraries\SFML-2.4.2\include;C:\Program Libraries\rapidxml-1.13;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Libraries\SFML-2.4.2\include;C:\Program Libraries\rapidxml-1.13;G:\Programming Projects\SFMLGame\SFML_Game\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -140,6 +140,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Program Libraries\SFML-2.4.2\include;C:\Program Libraries\rapidxml-1.13;G:\Programming Projects\SFMLGame\SFML_Game\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

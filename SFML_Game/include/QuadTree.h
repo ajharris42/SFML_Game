@@ -14,8 +14,15 @@ struct Node
 			this->vect = vect;
 			this->data = data;
 		}
+
+		Node(sf::Vector2<float> vect, int test_data)
+		{
+			this->vect = vect;
+			this->test_data = test_data;
+		}
 		
 		GameEntity* data;
+		int test_data;
 		
 		sf::Vector2<float> vect;
 };
