@@ -53,12 +53,10 @@ bool Quadtree::insert(Node* new_node)
 		{
 			return north_west->insert(new_node);
 		}
-		else
-		{
-			north_west = new Quadtree(tmp);
 
-			curr = north_west;
-		}
+		north_west = new Quadtree(tmp);
+
+		curr = north_west;
 	}
 
 	tmp.left += tmp.width;
@@ -68,12 +66,10 @@ bool Quadtree::insert(Node* new_node)
 		{
 			return north_east->insert(new_node);
 		}
-		else
-		{
-			north_east = new Quadtree(tmp);
+
+		north_east = new Quadtree(tmp);
 			
-			curr = north_east;
-		}
+		curr = north_east;
 	}
 	
 	tmp.top += tmp.height;
@@ -83,12 +79,10 @@ bool Quadtree::insert(Node* new_node)
 		{
 			return south_east->insert(new_node);
 		}
-		else
-		{
-			south_east = new Quadtree(tmp);
+
+		south_east = new Quadtree(tmp);
 			
-			curr = south_east;
-		}
+		curr = south_east;
 	}
 	
 	tmp.left -= tmp.width;
@@ -98,15 +92,13 @@ bool Quadtree::insert(Node* new_node)
 		{
 			return south_west->insert(new_node);
 		}
-		else
-		{
-			south_west = new Quadtree(tmp);
+
+		south_west = new Quadtree(tmp);
 						
-			curr = south_west;
-		}
+		curr = south_west;
 	}
 
-	for (auto i = 0; i < points.size(); ++i)
+	for (std::size_t i = 0; i < points.size(); ++i)
 	{
 		if (curr->location.contains(points[i]->vect))
 		{
