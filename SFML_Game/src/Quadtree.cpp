@@ -123,73 +123,55 @@ bool Quadtree::insert(Node* new_node)
 
 bool Quadtree::remove(Node* node)
 {
-	sf::Rect<float> tmp(location);
-	tmp.width /= 2.0f;
-	tmp.height /= 2.0f;
 
-	if (tmp.contains(node->vect))
+	if (north_west != nullptr)
 	{
-		if (north_west != nullptr)
-		{
-			north_west->remove(node);
+		north_west->remove(node);
 
-			if (north_west->get_contained_nodes(north_west->location).empty())
-			{
-				delete north_west;
-				north_west = nullptr;
-			}
+		if (north_west->get_contained_nodes(north_west->location).empty())
+		{
+			delete north_west;
+			north_west = nullptr;
 		}
 	}
 
-	tmp.left += tmp.width;
-	if (tmp.contains(node->vect))
+	if (north_east != nullptr)
 	{
-		if (north_east != nullptr)
+		const bool success = north_east->remove(node);
+
+		if (north_east->get_contained_nodes(north_east->location).empty())
 		{
-			const bool success = north_east->remove(node);
-
-			if (north_east->get_contained_nodes(north_east->location).empty())
-			{
-				delete north_east;
-				north_east = nullptr;
-			}
-
-			return success;
+			delete north_east;
+			north_east = nullptr;
 		}
+
+		return success;
 	}
 
-	tmp.top += tmp.height;
-	if (tmp.contains(node->vect))
+	if (south_east != nullptr)
 	{
-		if (south_east != nullptr)
+		const bool success = south_east->remove(node);
+
+		if (south_east->get_contained_nodes(south_east->location).empty())
 		{
-			const bool success = south_east->remove(node);
-
-			if (south_east->get_contained_nodes(south_east->location).empty())
-			{
-				delete south_east;
-				south_east = nullptr;
-			}
-
-			return success;
+			delete south_east;
+			south_east = nullptr;
 		}
+
+		return success;
 	}
 
-	tmp.left -= tmp.width;
-	if (tmp.contains(node->vect))
+	if (south_west != nullptr)
 	{
-		if (south_west != nullptr)
+		const bool success = south_west->remove(node);
+
+		if (south_west->get_contained_nodes(south_west->location).empty())
 		{
-			const bool success = south_west->remove(node);
-
-			if (south_west->get_contained_nodes(south_west->location).empty())
-			{
-				delete south_west;
-				south_west = nullptr;
-			}
-
-			return success;
+			delete south_west;
+			south_west = nullptr;
 		}
+
+		return success;
 	}
 
 	const auto elem = std::find(points.begin(), points.end(), node);
