@@ -1,7 +1,7 @@
-#include "Quadtree.h"
+#include "QuadTree.h"
 #include <iostream>
 
-Quadtree::Quadtree(sf::Rect<float> location)
+Quadtree::Quadtree(const sf::Rect<float> &location)
 {
 	this->location = location;
 
@@ -11,7 +11,7 @@ Quadtree::Quadtree(sf::Rect<float> location)
 	south_west = nullptr;
 }
 
-bool Quadtree::area_contains_location(sf::Rect<float> area) const
+bool Quadtree::area_contains_location(const sf::Rect<float> &area) const
 {
 	return (location.left >= area.left && location.top >= area.top &&
 		    location.left + location.width <= area.left + area.width &&
@@ -19,7 +19,7 @@ bool Quadtree::area_contains_location(sf::Rect<float> area) const
 		   );
 }
 
-bool Quadtree::location_contains_area(sf::Rect<float> area) const
+bool Quadtree::location_contains_area(const sf::Rect<float> &area) const
 {
 	return (location.left <= area.left && location.top <= area.top &&
 			location.left + location.width >= area.left + area.width &&
@@ -133,7 +133,7 @@ bool Quadtree::remove(Node* node)
 		{
 			north_west->remove(node);
 
-			if (north_west->get_contained_nodes(north_west->location).size() == 0)
+			if (north_west->get_contained_nodes(north_west->location).empty())
 			{
 				delete north_west;
 				north_west = nullptr;
@@ -146,9 +146,9 @@ bool Quadtree::remove(Node* node)
 	{
 		if (north_east != nullptr)
 		{
-			bool success = north_east->remove(node);
+			const bool success = north_east->remove(node);
 
-			if (north_east->get_contained_nodes(north_east->location).size() == 0)
+			if (north_east->get_contained_nodes(north_east->location).empty())
 			{
 				delete north_east;
 				north_east = nullptr;
@@ -163,9 +163,9 @@ bool Quadtree::remove(Node* node)
 	{
 		if (south_east != nullptr)
 		{
-			bool success = south_east->remove(node);
+			const bool success = south_east->remove(node);
 
-			if (south_east->get_contained_nodes(south_east->location).size() == 0)
+			if (south_east->get_contained_nodes(south_east->location).empty())
 			{
 				delete south_east;
 				south_east = nullptr;
@@ -180,9 +180,9 @@ bool Quadtree::remove(Node* node)
 	{
 		if (south_west != nullptr)
 		{
-			bool success = south_west->remove(node);
+			const bool success = south_west->remove(node);
 
-			if (south_west->get_contained_nodes(south_west->location).size() == 0)
+			if (south_west->get_contained_nodes(south_west->location).empty())
 			{
 				delete south_west;
 				south_west = nullptr;
@@ -192,7 +192,7 @@ bool Quadtree::remove(Node* node)
 		}
 	}
 
-	auto elem = std::find(points.begin(), points.end(), node);
+	const auto elem = std::find(points.begin(), points.end(), node);
 	if (elem != points.end())
 	{
 		points.erase(elem);
@@ -205,7 +205,7 @@ bool Quadtree::remove(Node* node)
 
 bool Quadtree::update(Node* node)
 {
-	auto elem = std::find(points.begin(), points.end(), node);
+	const auto elem = std::find(points.begin(), points.end(), node);
 	if (elem != points.end())
 	{
 		if (!location.contains(node->vect))
@@ -214,67 +214,46 @@ bool Quadtree::update(Node* node)
 
 			return true;
 		}
-		else
+
+		*elem = node;
+	}
+
+	if (north_west != nullptr)
+	{
+		if (north_west->update(node))
 		{
-			*elem = node;
+			return insert(node);
 		}
 	}
 
-	sf::Rect<float> tmp(location);
-	tmp.width /= 2.0f;
-	tmp.height /= 2.0f;
-
-	if (tmp.contains(node->vect))
+	if (north_east != nullptr)
 	{
-		if (north_west != nullptr)
+		if (north_east->update(node))
 		{
-			if (north_west->update(node))
-			{
-				return insert(node);
-			}
+			return insert(node);
 		}
 	}
 
-	tmp.left += tmp.width;
-	if (tmp.contains(node->vect))
+	if (south_east != nullptr)
 	{
-		if (north_east != nullptr)
+		if (south_east->update(node))
 		{
-			if (north_east->update(node))
-			{
-				return insert(node);
-			}
+			return insert(node);
 		}
 	}
 
-	tmp.top += tmp.height;
-	if (tmp.contains(node->vect))
+	if (south_west != nullptr)
 	{
-		if (south_east != nullptr)
+		if (south_west->update(node))
 		{
-			if (south_east->update(node))
-			{
-				return insert(node);
-			}
-		}
-	}
-
-	tmp.left -= tmp.width;
-	if (tmp.contains(node->vect))
-	{
-		if (south_west != nullptr)
-		{
-			if (south_west->update(node))
-			{
-				return insert(node);
-			}
+			return insert(node);
 		}
 	}
 
 	return false;
 }
 
-std::vector<Node*> Quadtree::get_contained_nodes(sf::Rect<float> area) const
+std::vector<Node*> Quadtree::get_contained_nodes(const sf::Rect<float> &area) const
 {
 	std::vector<Node*> nodes;
 
@@ -326,15 +305,8 @@ std::vector<Node*> Quadtree::get_contained_nodes(sf::Rect<float> area) const
 
 Quadtree::~Quadtree()
 {
-	if (north_west != nullptr) 
-		delete north_west;
-	
-	if (north_east != nullptr)
-		delete north_east;
-
-	if (south_west != nullptr)
-		delete south_west;
-	
-	if (south_east != nullptr)
-		delete south_east;
+	delete north_west;
+	delete north_east;
+	delete south_west;
+	delete south_east;
 }
