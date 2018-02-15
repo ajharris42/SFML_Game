@@ -3,9 +3,9 @@
 #include "MapLoader.h"
 #include "Graphics.h"
 #include "Player.h"
+#include "Quadtree.h"
 
 class Camera;
-class Quadtree;
 
 class World
 {
@@ -23,17 +23,15 @@ class World
 
 		//void setPlayer(std::shared_ptr<Player> p) { this->p = p; addEntity(p); }
 
-		void addEntity(std::shared_ptr<GameEntity> entity);
+		void addEntity(const std::shared_ptr<GameEntity> &entity);
 	private:
 		Graphics* g;
-		Quadtree* quad_tree;
+		Quadtree<GameEntity>* quad_tree;
 
 		std::shared_ptr<Map> map;
-
-		std::vector<std::shared_ptr<GameEntity> > entities;
-
 		std::shared_ptr<Player> p;
 
+		std::vector<std::shared_ptr<GameEntity> > entities;
 		std::vector<sf::FloatRect > collisionObjects;
 };
 

@@ -1,7 +1,6 @@
 #include "World.h"
 #include "NPC.h"
 #include "Camera.h"
-#include "QuadTree.h"
 
 World::World(const char *worldFile)
 {
@@ -13,7 +12,7 @@ World::World(const char *worldFile)
 
 	collisionObjects = map->getCollisionObjects();
 
-	quad_tree = new Quadtree(sf::Rect<float>(0, 0, 800, 800));
+	quad_tree = new Quadtree<GameEntity>(sf::Rect<float>(0, 0, 800, 800));
 }
 
 void World::Update(sf::Time deltaT)
@@ -110,10 +109,11 @@ void World::Render(Camera c)
 
 void World::RenderEntities(Camera c)
 {
-	std::vector<Node*> nodes = quad_tree->get_contained_nodes(c.bounds);
-	std::for_each(nodes.begin(), nodes.end(), [&](Node* node)
+	std::vector<Node<GameEntity>*> nodes = quad_tree->get_contained_nodes(c.bounds);
+	std::for_each(nodes.begin(), nodes.end(), [&](Node<GameEntity>* node)
 	{
 		node->data->render();
+		puts("I rendered!");
 	});
 
 	/*for (auto i = entities.size() - 1; i != std::vector<int>::size_type(-1); --i)
@@ -125,13 +125,11 @@ void World::RenderEntities(Camera c)
 	}*/
 }
 
-void World::addEntity(std::shared_ptr<GameEntity> entity)
+void World::addEntity(const std::shared_ptr<GameEntity> &entity)
 {
 	entities.push_back(entity);
 
-	// ToDo: This leaks, need to clean up
-	// Also, use smart pointers
-	quad_tree->insert(new Node(sf::Vector2f(entity->getX(), entity->getY()), entity.get()));
+	quad_tree->insert(entity->getPosition(), entity.get());
 }
 
 World::~World()

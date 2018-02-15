@@ -2,14 +2,14 @@
 
 #include "GameEntity.h"
 
-InputComponent::InputComponent(Input *i)
+InputComponent::InputComponent(Input* i)
 {
 	this->i = i;
 }
 
-void InputComponent::update(GameEntity *e)
+void InputComponent::update(GameEntity* e)
 {
-	EntityCommand *c = i->getEntityInput();
+	EntityCommand* c = i->getEntityInput();
 
 	if (c != nullptr)
 	{
@@ -20,9 +20,9 @@ void InputComponent::update(GameEntity *e)
 	}
 }
 
-void InputComponent::update(Camera *c) const
+void InputComponent::update(Camera* c) const
 {
-	CameraCommand *command = i->getCameraInput();
+	CameraCommand* command = i->getCameraInput();
 
 	if (command != nullptr)
 	{

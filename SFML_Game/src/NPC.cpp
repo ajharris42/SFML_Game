@@ -20,10 +20,10 @@ bool NPC::update()
 		inputComponent->update(this);
 
 		//Update where the texture should be applied
-		textureBounds[0].position = sf::Vector2f(x, y);
-		textureBounds[1].position = sf::Vector2f((x + width), y);
-		textureBounds[2].position = sf::Vector2f((x + width), (y + height));
-		textureBounds[3].position = sf::Vector2f(x, (y + height));
+		textureBounds[0].position = sf::Vector2f(position.x, position.y);
+		textureBounds[1].position = sf::Vector2f((position.x + width), position.y);
+		textureBounds[2].position = sf::Vector2f((position.x + width), (position.y + height));
+		textureBounds[3].position = sf::Vector2f(position.x, (position.y + height));
 
 		return true;
 	}

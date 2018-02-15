@@ -8,7 +8,7 @@ class InputComponent;
 class Camera
 {
 	public:
-		explicit Camera(InputComponent *i);
+		explicit Camera(InputComponent* i);
 
 		~Camera();
 
@@ -16,8 +16,8 @@ class Camera
 
 		sf::Vector2f getPosition() const { return position; }
 
-		float *screenX;
-		float *screenY;
+		float* screenX;
+		float* screenY;
 
 		sf::FloatRect bounds;
 
@@ -36,7 +36,7 @@ class Camera
 
 		sf::View mainView;
 
-		Graphics *g;
+		Graphics* g;
 
-		InputComponent *inputComponent;
+		InputComponent* inputComponent;
 };

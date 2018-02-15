@@ -18,12 +18,13 @@ class GameEntity
 
 		sf::FloatRect getBounds() const;
 
-		float getX() const { return x; }
-		float getY() const { return y; }
+		float getX() const { return position.x; }
+		float getY() const { return position.y; }
 		float getWidth() const { return width; }
 		float getHeight() const { return height; }
 		int getId() const { return id; }
 		void setId(int id) { this->id = id; }
+		sf::Vector2f getPosition() const { return position; }
 
 		virtual void addComponent(Component *c);
 
@@ -44,7 +45,9 @@ class GameEntity
 		sf::Texture texture;
 		sf::FloatRect bounds;
 
-		float x, y, width, height;
+		sf::Vector2f position;
+
+		float width, height;
 		float moveSpeed;
 
 		sf::VertexArray textureBounds;

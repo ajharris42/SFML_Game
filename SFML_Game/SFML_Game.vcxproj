@@ -112,7 +112,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Libraries\SFML-2.4.2\include;C:\Program Libraries\rapidxml-1.13;G:\Programming Projects\SFMLGame\SFML_Game\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Libraries\SFML-2.4.2\include;C:\Program Libraries\rapidxml-1.13;C:\Users\Andrew\Documents\Projects\SFML_Game\SFML_Game\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -140,7 +140,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Libraries\SFML-2.4.2\include;C:\Program Libraries\rapidxml-1.13;G:\Programming Projects\SFMLGame\SFML_Game\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Libraries\SFML-2.4.2\include;C:\Program Libraries\rapidxml-1.13;C:\Users\Andrew\Documents\Projects\SFML_Game\SFML_Game\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>

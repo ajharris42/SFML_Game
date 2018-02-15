@@ -2,8 +2,8 @@
 
 Player::Player()
 {
-	x = 320; width = 64;
-	y = 240; height = 64;
+	position.x = 320; width = 64;
+	position.y = 240; height = 64;
 
 	moveSpeed = 120;
 

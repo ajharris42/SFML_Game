@@ -1,11 +1,11 @@
 #include "Input.h"
 
 
-sf::RenderWindow *Input::window = nullptr;
+sf::RenderWindow* Input::window = nullptr;
 
 bool Input::close = false;
 
-Input::Input(sf::RenderWindow *window)
+Input::Input(sf::RenderWindow* window)
 {
 	this->window = window;
 }
@@ -44,7 +44,7 @@ void Input::pollEvents() {
 }
 
 //I don't like how much duplication there is in this, but I have yet to find a better solution
-EntityCommand *Input::getEntityInput()
+EntityCommand* Input::getEntityInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		return new MoveCommand(GameEntity::UP);
@@ -58,7 +58,7 @@ EntityCommand *Input::getEntityInput()
 	return nullptr;
 }
 
-CameraCommand *Input::getCameraInput()
+CameraCommand* Input::getCameraInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		return new MoveCommand(GameEntity::UP);

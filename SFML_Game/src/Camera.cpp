@@ -2,7 +2,7 @@
 #include "Command.h"
 #include "InputComponent.h"
 
-Camera::Camera(InputComponent *i)
+Camera::Camera(InputComponent* i)
 {
 	inputComponent = i;
 

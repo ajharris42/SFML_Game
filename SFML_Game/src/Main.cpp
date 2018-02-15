@@ -1,16 +1,14 @@
 #include "Game.h"
 
-#include "QuadTree.h"
-
 int main(int argc, char *argv[])
 {
 	std::srand(std::time(nullptr));
 
-	//Game g;
+	Game g;
 
-	//g.work();
+	g.work();
 
-	Quadtree tree(sf::Rect<float>(0, 0, 10, 10));
+	/*Quadtree tree(sf::Rect<float>(0, 0, 10, 10));
 
 	Node* node = new Node(sf::Vector2<float>(7, 2), 3);
 	Node* node6 = new Node(sf::Vector2<float>(2, 2), 6);
@@ -42,7 +40,7 @@ int main(int argc, char *argv[])
 		std::cout << "X: " << val->vect.x << " Y: " << val->vect.y << " Data: " << val->test_data << "\n";
 	});
 
-	std::cin.get();
+	std::cin.get();*/
 
 	if(DEBUG_MODE)
 		_CrtDumpMemoryLeaks();

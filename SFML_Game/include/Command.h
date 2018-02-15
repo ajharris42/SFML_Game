@@ -55,21 +55,21 @@ class MoveCommand : public EntityCommand, public CameraCommand
 		void execute(Camera *c) override
 		{
 			switch (d) {
-			case GameEntity::UP:
-				c->moveUp();
-				break;
-			case GameEntity::DOWN:
-				c->moveDown();
-				break;
-			case GameEntity::LEFT:
-				c->moveLeft();
-				break;
-			case GameEntity::RIGHT:
-				c->moveRight();
-				break;
-			default:
-				//uhhh
-				break;
+				case GameEntity::UP:
+					c->moveUp();
+					break;
+				case GameEntity::DOWN:
+					c->moveDown();
+					break;
+				case GameEntity::LEFT:
+					c->moveLeft();
+					break;
+				case GameEntity::RIGHT:
+					c->moveRight();
+					break;
+				default:
+					//uhhh
+					break;
 			}
 		}
 
