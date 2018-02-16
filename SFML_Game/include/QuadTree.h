@@ -35,14 +35,21 @@ class Quadtree
 		bool area_contains_location(const sf::Rect<float> &area) const;
 		bool location_contains_area(const sf::Rect<float> &area) const;
 
+		void destroy(Quadtree<T>* tree);
+
 		std::vector<Node<T>*> points;
 	public:
 		explicit Quadtree(const sf::Rect<float> &location);
+		Quadtree(const Quadtree &tree);
+		Quadtree(Quadtree&&) = default;
 		~Quadtree();
+
+		Quadtree& operator=(const Quadtree&) = default;
+		Quadtree& operator=(Quadtree&&) = default;
 
 		bool insert(const sf::Vector2f &vect, T* new_val);
 		bool remove(T* node);
-		bool update(T* node);
+		bool update(const sf::Vector2f &vect, T* node);
 		std::vector<Node<T>*> get_contained_nodes(const sf::Rect<float> &area) const;
 
 };
@@ -56,6 +63,17 @@ Quadtree<T>::Quadtree(const sf::Rect<float> &location)
 	north_east = nullptr;
 	south_east = nullptr;
 	south_west = nullptr;
+
+	points.reserve(MAX_SIZE);
+}
+
+template <class T>
+Quadtree<T>::Quadtree(const Quadtree &tree)
+{
+	tree->north_west = nullptr;
+	tree->north_east = nullptr;
+	tree->south_west = nullptr;
+	tree->south_east = nullptr;
 }
 
 template <class T>
@@ -74,6 +92,38 @@ bool Quadtree<T>::location_contains_area(const sf::Rect<float> &area) const
 		location.left + location.width >= area.left + area.width &&
 		location.top + location.height >= area.top + area.height
 		);
+}
+
+template <class T>
+void Quadtree<T>::destroy(Quadtree<T>* tree)
+{
+	if (tree == nullptr)
+	{
+		return;
+	}
+
+	std::for_each(tree->points.begin(), tree->points.end(), [&](Node<T>* node)
+	{
+		delete node;
+		node = nullptr;
+	});
+
+	destroy(tree->north_east);
+	destroy(tree->north_west);
+	destroy(tree->south_east);
+	destroy(tree->south_west);
+
+	delete north_east;
+	north_east = nullptr;
+
+	delete north_west;
+	north_west = nullptr;
+
+	delete south_east;
+	south_east = nullptr;
+
+	delete south_west;
+	south_west = nullptr;
 }
 
 template <class T>
@@ -218,7 +268,7 @@ bool Quadtree<T>::remove(T* node)
 		return success;
 	}
 
-	const auto elem = std::find_if(points.begin(), points.end(), [&](Node<T>* val)
+	const auto elem = std::find_if(points.begin(), points.end(), [&node](Node<T>* val)
 	{
 		return val->data == node;
 	});
@@ -234,54 +284,55 @@ bool Quadtree<T>::remove(T* node)
 }
 
 template <class T>
-bool Quadtree<T>::update(T* node)
+bool Quadtree<T>::update(const sf::Vector2f &vect, T* node)
 {
-	const auto elem = std::find_if(points.begin(), points.end(), [&](Node<T>* val)
+	const auto elem = std::find_if(points.begin(), points.end(), [&node](Node<T>* val)
 	{
 		return val->data == node;
 	});
 
 	if (elem != points.end())
 	{
-		if (!location.contains(elem->vect))
+		if (!location.contains(vect))
 		{
 			points.erase(elem);
 
 			return true;
 		}
 
-		*elem = node;
+		(*elem)->data = node;
+		(*elem)->vect = vect;
 	}
 
 	if (north_west != nullptr)
 	{
-		if (north_west->update(node))
+		if (north_west->update(vect, node))
 		{
-			return insert(node);
+			return insert(vect, node);
 		}
 	}
 
 	if (north_east != nullptr)
 	{
-		if (north_east->update(node))
+		if (north_east->update(vect, node))
 		{
-			return insert(node);
+			return insert(vect, node);
 		}
 	}
 
 	if (south_east != nullptr)
 	{
-		if (south_east->update(node))
+		if (south_east->update(vect, node))
 		{
-			return insert(node);
+			return insert(vect, node);
 		}
 	}
 
 	if (south_west != nullptr)
 	{
-		if (south_west->update(node))
+		if (south_west->update(vect, node))
 		{
-			return insert(node);
+			return insert(vect, node);
 		}
 	}
 
@@ -342,8 +393,5 @@ std::vector<Node<T>*> Quadtree<T>::get_contained_nodes(const sf::Rect<float> &ar
 template <class T>
 Quadtree<T>::~Quadtree()
 {
-	delete north_west;
-	delete north_east;
-	delete south_west;
-	delete south_east;
+	destroy(this);
 }

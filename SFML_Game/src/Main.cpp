@@ -1,29 +1,31 @@
 #include "Game.h"
 
+#include "Quadtree.h"
 int main(int argc, char *argv[])
 {
 	std::srand(std::time(nullptr));
 
-	Game g;
+	//Game g;
 
-	g.work();
+	//g.work();
 
-	/*Quadtree tree(sf::Rect<float>(0, 0, 10, 10));
+	Quadtree<int> tree(sf::Rect<float>(0, 0, 10, 10));
 
-	Node* node = new Node(sf::Vector2<float>(7, 2), 3);
-	Node* node6 = new Node(sf::Vector2<float>(2, 2), 6);
-	tree.insert(new Node(sf::Vector2<float>(1, 1), 1));
-	tree.insert(new Node(sf::Vector2<float>(4, 1), 2));
-	tree.insert(node);
-	tree.insert(new Node(sf::Vector2<float>(6, 6), 4));
-	tree.insert(new Node(sf::Vector2<float>(2, 7), 5));
-	tree.insert(node6);
+	int* node = new int(3);
+	int* node6 = new int(6);
+
+	tree.insert(sf::Vector2f(1, 1), new int(1));
+	tree.insert(sf::Vector2f(4, 1), new int(2));
+	tree.insert(sf::Vector2f(7, 2), node);
+	tree.insert(sf::Vector2f(6, 6), new int(4));
+	tree.insert(sf::Vector2f(2, 7), new int(5));
+	tree.insert(sf::Vector2f(2, 2), node6);
 
 	puts("After Insertion:");
 	auto values = tree.get_contained_nodes(sf::Rect<float>(0, 0, 10, 10));
-	std::for_each(values.begin(), values.end(), [&](Node* val)
+	std::for_each(values.begin(), values.end(), [&](Node<int>* val)
 	{
-		std::cout << "X: " << val->vect.x << " Y: " << val->vect.y << " Data: " << val->test_data << "\n";
+		std::cout << "X: " << val->vect.x << " Y: " << val->vect.y << " Data: " << *val->data << "\n";
 	});
 
 	//tree.remove(&node);
@@ -31,16 +33,15 @@ int main(int argc, char *argv[])
 
 	puts("\nAfter Update:");
 
-	node6->vect = sf::Vector2<float>(7, 3);
-	tree.update(node6);
+	tree.update(sf::Vector2f(7, 3), node6);
 
 	values = tree.get_contained_nodes(sf::Rect<float>(0, 0, 10, 10));
-	std::for_each(values.begin(), values.end(), [&](Node* val)
+	std::for_each(values.begin(), values.end(), [&](Node<int>* val)
 	{
-		std::cout << "X: " << val->vect.x << " Y: " << val->vect.y << " Data: " << val->test_data << "\n";
+		std::cout << "X: " << val->vect.x << " Y: " << val->vect.y << " Data: " << *val->data << "\n";
 	});
 
-	std::cin.get();*/
+	std::cin.get();
 
 	if(DEBUG_MODE)
 		_CrtDumpMemoryLeaks();
