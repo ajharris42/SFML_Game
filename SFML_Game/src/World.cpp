@@ -109,10 +109,12 @@ void World::Render(Camera c)
 
 void World::RenderEntities(Camera c)
 {
+	sf::RenderStates states;
+
 	std::vector<Node<GameEntity>*> nodes = quad_tree->get_contained_nodes(c.bounds);
 	std::for_each(nodes.begin(), nodes.end(), [&](Node<GameEntity>* node)
 	{
-		node->data->render();
+		node->data->draw(*g->getWindow(), states);
 		puts("I rendered!");
 	});
 

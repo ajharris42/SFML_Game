@@ -1,9 +1,13 @@
 #include "Player.h"
 
-Player::Player()
+Player::Player(const sf::Vector2f &position) : GameEntity(position)
 {
-	position.x = 320; width = 64;
-	position.y = 240; height = 64;
+	setPosition(position);
+
+	//position.x = 320; 
+	//position.y = 240;
+	width = 64;
+	height = 64;
 
 	moveSpeed = 120;
 
@@ -50,19 +54,6 @@ bool Player::update()
 	renderStates.texture = &texture;
 
 	return true;
-}
-
-//Deprecated
-void Player::render()
-{
-	
-}
-
-void Player::takeTurn()
-{
-	//System will pass priority
-
-	//Process Action que
 }
 
 Player::~Player()

@@ -14,7 +14,7 @@ Game::Game()
 	g = Graphics::getInstance();
 
 	i = std::make_unique<Input>(g->getWindow());
-	p = std::make_shared<Player>();
+	p = std::make_shared<Player>(sf::Vector2f(320, 320));
 
 	running = true;
 
@@ -34,12 +34,13 @@ void Game::work()
 	std::shared_ptr<RenderComponent> r1 = std::make_shared<RenderComponent>();
 
 	//This is temporary, components should be added elsewhere. Also should use smart pointers
-	std::shared_ptr<GameEntity> e = std::make_shared<NPC>(&aiController, r1.get());
-	std::shared_ptr<GameEntity> j = std::make_shared<NPC>(input.get(), r1.get());
+	std::shared_ptr<GameEntity> e = std::make_shared<NPC>(sf::Vector2f(400, 400), &aiController);
+	std::shared_ptr<GameEntity> j = std::make_shared<NPC>(sf::Vector2f(200, 200), input.get());
 
 	e->setId(0);
 	j->setId(1);
 
+	world.addEntity(p);
 	world.addEntity(e);
 	world.addEntity(j);
 

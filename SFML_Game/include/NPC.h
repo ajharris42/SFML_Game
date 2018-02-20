@@ -8,12 +8,11 @@ class RenderComponent;
 class NPC : public GameEntity
 {
 	public:
-		NPC(InputComponent *i, RenderComponent *g);
-		~NPC();
+		NPC(const sf::Vector2f &position, InputComponent* i);
+		~NPC() = default;
 
 		bool update() override;
-		void render() override;
 
-		void addComponent(Component *c) override;
+		void addComponent(Component* c) override;
 };
 

@@ -5,11 +5,11 @@ int main(int argc, char *argv[])
 {
 	std::srand(std::time(nullptr));
 
-	//Game g;
+	Game g;
 
-	//g.work();
+	g.work();
 
-	Quadtree<int> tree(sf::Rect<float>(0, 0, 10, 10));
+	/*Quadtree<int> tree(sf::Rect<float>(0, 0, 10, 10));
 
 	int* node = new int(3);
 	int* node6 = new int(6);
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 		std::cout << "X: " << val->vect.x << " Y: " << val->vect.y << " Data: " << *val->data << "\n";
 	});
 
-	std::cin.get();
+	std::cin.get();*/
 
 	if(DEBUG_MODE)
 		_CrtDumpMemoryLeaks();

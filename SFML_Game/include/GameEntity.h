@@ -5,26 +5,23 @@
 
 class Component;
 class InputComponent;
-class RenderComponent;
 
-class GameEntity
+class GameEntity : public sf::Drawable, public sf::Transformable
 {
 	public:
-		GameEntity();
+		explicit GameEntity(const sf::Vector2f &position);
 		virtual ~GameEntity();
 
 		virtual bool update() = 0;
-		virtual void render() = 0;
+
+		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 		sf::FloatRect getBounds() const;
 
-		float getX() const { return position.x; }
-		float getY() const { return position.y; }
 		float getWidth() const { return width; }
 		float getHeight() const { return height; }
 		int getId() const { return id; }
 		void setId(int id) { this->id = id; }
-		sf::Vector2f getPosition() const { return position; }
 
 		virtual void addComponent(Component *c);
 
@@ -45,8 +42,6 @@ class GameEntity
 		sf::Texture texture;
 		sf::FloatRect bounds;
 
-		sf::Vector2f position;
-
 		float width, height;
 		float moveSpeed;
 
@@ -58,6 +53,5 @@ class GameEntity
 		sf::RenderStates renderStates;
 
 		InputComponent *inputComponent;
-		RenderComponent *renderComponent;
 };
 

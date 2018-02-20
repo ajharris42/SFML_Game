@@ -3,9 +3,10 @@
 #include "InputComponent.h"
 #include "RenderComponent.h"
 
-GameEntity::GameEntity()
+GameEntity::GameEntity(const sf::Vector2f &position)
 {
-	position.x = 320.0f; position.y = 240.0f;
+	setPosition(position);
+
 	width = 64; height = 64;
 
 	bounds.left = position.x;
@@ -44,7 +45,10 @@ sf::FloatRect GameEntity::getBounds() const
 
 void GameEntity::moveUp()
 {
-	position.y -= moveSpeed;
+	sf::Vector2f pos = getPosition();
+	pos.y -= moveSpeed;
+	setPosition(pos);
+
 	bounds.top -= moveSpeed;
 
 	direction = UP;
@@ -52,7 +56,10 @@ void GameEntity::moveUp()
 
 void GameEntity::moveDown()
 {
-	position.y += moveSpeed;
+	sf::Vector2f pos = getPosition();
+	pos.y += moveSpeed;
+	setPosition(pos);
+
 	bounds.top += moveSpeed;
 
 	direction = DOWN;
@@ -60,7 +67,12 @@ void GameEntity::moveDown()
 
 void GameEntity::moveLeft()
 {
-	position.x -= moveSpeed;
+	
+	sf::Vector2f pos = getPosition();
+	pos.x -= moveSpeed;
+	setPosition(pos);
+
+
 	bounds.left -= moveSpeed;
 
 	direction = LEFT;
@@ -68,10 +80,27 @@ void GameEntity::moveLeft()
 
 void GameEntity::moveRight()
 {
-	position.x += moveSpeed;
+	sf::Vector2f pos = getPosition();
+	pos.x += moveSpeed;
+	setPosition(pos);
+
 	bounds.left += moveSpeed;
 
 	direction = RIGHT;
+}
+
+void GameEntity::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	// apply the entity's transform -- combine it with the one that was passed by the caller
+	states.transform *= getTransform(); // getTransform() is defined by sf::Transformable
+
+										
+	states.texture = &texture;
+
+	// you may also override states.shader or states.blendMode if you want
+
+	// draw the vertex array
+	target.draw(textureBounds, states);
 }
 
 GameEntity::~GameEntity()

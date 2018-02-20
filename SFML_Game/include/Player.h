@@ -6,11 +6,9 @@
 class Player : public GameEntity 
 {
 	public:
-		Player();
+		Player(const sf::Vector2f &position);
 		~Player();
 
 		bool update() override;
-		void render() override;
 	private:
-		void takeTurn();
 };
