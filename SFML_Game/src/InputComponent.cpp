@@ -1,5 +1,4 @@
 #include "InputComponent.h"
-
 #include "GameEntity.h"
 
 InputComponent::InputComponent(Input* i)
@@ -7,9 +6,9 @@ InputComponent::InputComponent(Input* i)
 	this->i = i;
 }
 
-void InputComponent::update(GameEntity* e)
+void InputComponent::update(Moveable* e) const
 {
-	EntityCommand* c = i->getEntityInput();
+	MoveCommand* c = dynamic_cast<MoveCommand*>(i->getEntityInput());
 
 	if (c != nullptr)
 	{
@@ -17,19 +16,6 @@ void InputComponent::update(GameEntity* e)
 
 		delete c;
 		c = nullptr;
-	}
-}
-
-void InputComponent::update(Camera* c) const
-{
-	CameraCommand* command = i->getCameraInput();
-
-	if (command != nullptr)
-	{
-		command->execute(c);
-
-		delete command;
-		command = nullptr;
 	}
 }
 

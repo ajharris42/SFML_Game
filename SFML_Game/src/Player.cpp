@@ -1,8 +1,11 @@
 #include "Player.h"
+#include "InputComponent.h"
 
-Player::Player(const sf::Vector2f &position) : GameEntity(position)
+Player::Player(const sf::Vector2f &position, InputComponent* i) : GameEntity(position)
 {
 	setPosition(position);
+
+	inputComponent = i;
 
 	//position.x = 320; 
 	//position.y = 240;
@@ -25,35 +28,22 @@ Player::Player(const sf::Vector2f &position) : GameEntity(position)
 
 bool Player::update()
 {
-	//Only allowed to move in one direction at a time. No Diagonals
-	/*if(in->keyPressed("Up")){
-		y -= (dV * deltaT.asSeconds());
-		direction = UP;
-		collisionRect.top -= (dV * deltaT.asSeconds());
-	}else if(in->keyPressed("Down")){
-		y += (dV * deltaT.asSeconds());
-		direction = DOWN;
-		collisionRect.top += (dV * deltaT.asSeconds());
-	}else if(in->keyPressed("Left")){
-		x -= (dV * deltaT.asSeconds());
-		direction = LEFT;
-		collisionRect.left -= (dV * deltaT.asSeconds());
-	}else if(in->keyPressed("Right")){
-		x += (dV * deltaT.asSeconds());
-		direction = RIGHT;
-		collisionRect.left += (dV * deltaT.asSeconds());
+	if (inputComponent != nullptr)
+	{
+		inputComponent->update(this);
+
+		const sf::Vector2f pos = getPosition();
+
+		//Update where the texture should be applied
+		textureBounds[0].position = sf::Vector2f(pos.x, pos.y);
+		textureBounds[1].position = sf::Vector2f((pos.x + width), pos.y);
+		textureBounds[2].position = sf::Vector2f((pos.x + width), (pos.y + height));
+		textureBounds[3].position = sf::Vector2f(pos.x, (pos.y + height));
+
+		return true;
 	}
-	*/
 
-/*	//Update all vertex positions
-	bounds[0].position = sf::Vector2f(x, y);
-	bounds[1].position = sf::Vector2f((x + w), y);
-	bounds[2].position = sf::Vector2f((x + w), (y + h));
-	bounds[3].position = sf::Vector2f(x, (y + h));
-*/
-	renderStates.texture = &texture;
-
-	return true;
+	return false;
 }
 
 Player::~Player()

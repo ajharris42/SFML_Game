@@ -14,19 +14,19 @@ void AIInputComponent::update(GameEntity* e)
 	//Temporary test code
 	if(pos.x >= 0 && pos.x <= 640 && e->getDirection() == e->LEFT)
 	{
-		e->moveLeft();
+		e->MoveLeft();
 	}
 	else if(pos.x >= 0 && pos.x <= 640 && e->getDirection() == e->RIGHT)
 	{
-		e->moveRight();
+		e->MoveRight();
 	}
 	else if(pos.x <= 0)
 	{
-		e->moveRight();
+		e->MoveRight();
 	}
 	else if(pos.x >= 640)
 	{
-		e->moveLeft();
+		e->MoveLeft();
 	}
 
 	/*if(e->getX() >= 640)

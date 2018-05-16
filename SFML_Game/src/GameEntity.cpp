@@ -7,6 +7,8 @@ GameEntity::GameEntity(const sf::Vector2f &position)
 {
 	setPosition(position);
 
+	inputComponent = nullptr;
+
 	width = 64; height = 64;
 
 	bounds.left = position.x;
@@ -43,7 +45,7 @@ sf::FloatRect GameEntity::getBounds() const
 	return bounds;
 }
 
-void GameEntity::moveUp()
+void GameEntity::MoveUp()
 {
 	sf::Vector2f pos = getPosition();
 	pos.y -= moveSpeed;
@@ -54,7 +56,7 @@ void GameEntity::moveUp()
 	direction = UP;
 }
 
-void GameEntity::moveDown()
+void GameEntity::MoveDown()
 {
 	sf::Vector2f pos = getPosition();
 	pos.y += moveSpeed;
@@ -65,7 +67,7 @@ void GameEntity::moveDown()
 	direction = DOWN;
 }
 
-void GameEntity::moveLeft()
+void GameEntity::MoveLeft()
 {
 	
 	sf::Vector2f pos = getPosition();
@@ -78,7 +80,7 @@ void GameEntity::moveLeft()
 	direction = LEFT;
 }
 
-void GameEntity::moveRight()
+void GameEntity::MoveRight()
 {
 	sf::Vector2f pos = getPosition();
 	pos.x += moveSpeed;
@@ -102,9 +104,3 @@ void GameEntity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	// draw the vertex array
 	target.draw(textureBounds, states);
 }
-
-GameEntity::~GameEntity()
-{
-
-}
-

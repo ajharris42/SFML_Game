@@ -7,6 +7,6 @@ class Component
 	public:
 		Component(){}
 		virtual ~Component(){}
-		virtual void update(GameEntity *e) = 0;
+		virtual void update(GameEntity* e) = 0;
 };
 

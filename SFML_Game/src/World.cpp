@@ -44,16 +44,16 @@ void World::UpdateEntities(sf::Time deltaT)
 					//Move the entity back based on which way it came
 					switch (e->getDirection()) {
 					case 0:
-						e->moveDown();
+						e->MoveDown();
 						break;
 					case 1:
-						e->moveUp();
+						e->MoveUp();
 						break;
 					case 2:
-						e->moveRight();
+						e->MoveRight();
 						break;
 					case 3:
-						e->moveLeft();
+						e->MoveLeft();
 						break;
 					default:
 						break;
@@ -72,8 +72,8 @@ void World::Render(Camera c)
 	//Draw layers 1 and 2
 
 	//This seems to save only about 100 frames
-	if (c.bounds.intersects(map->getVA1().getBounds()))
-	{
+	//if (c.bounds.intersects(map->getVA1().getBounds()))
+	//{
 		g->draw(map->getVA1(), states);
 
 		g->draw(map->getVA2(), states);
@@ -102,7 +102,7 @@ void World::Render(Camera c)
 
 		//Draw layer 3
 		g->draw(map->getVA3(), states);
-	}
+	//}
 	
 	RenderEntities(c);
 }
@@ -111,20 +111,20 @@ void World::RenderEntities(Camera c)
 {
 	sf::RenderStates states;
 
-	std::vector<Node<GameEntity>*> nodes = quad_tree->get_contained_nodes(c.bounds);
+	/*std::vector<Node<GameEntity>*> nodes = quad_tree->get_contained_nodes(c.bounds);
 	std::for_each(nodes.begin(), nodes.end(), [&](Node<GameEntity>* node)
 	{
 		node->data->draw(*g->getWindow(), states);
 		puts("I rendered!");
-	});
+	});*/
 
-	/*for (auto i = entities.size() - 1; i != std::vector<int>::size_type(-1); --i)
+	for (auto i = entities.size() - 1; i != std::vector<int>::size_type(-1); --i)
 	{
 		if (entities[i]->getBounds().intersects(c.bounds)) 
 		{
-			entities[i]->render();
+			entities[i]->draw(*g->getWindow(), states);
 		}
-	}*/
+	}
 }
 
 void World::addEntity(const std::shared_ptr<GameEntity> &entity)

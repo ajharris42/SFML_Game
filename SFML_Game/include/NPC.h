@@ -3,7 +3,6 @@
 #include "GameEntity.h"
 
 class InputComponent;
-class RenderComponent;
 
 class NPC : public GameEntity
 {

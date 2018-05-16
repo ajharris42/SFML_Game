@@ -14,7 +14,7 @@ Game::Game()
 	g = Graphics::getInstance();
 
 	i = std::make_unique<Input>(g->getWindow());
-	p = std::make_shared<Player>(sf::Vector2f(320, 320));
+	p = std::make_shared<Player>(sf::Vector2f(320, 320), new InputComponent(i.get()));
 
 	running = true;
 

@@ -21,22 +21,22 @@ Camera::Camera(InputComponent* i)
 	bounds.height = *screenY;
 }
 
-void Camera::moveUp()
+void Camera::MoveUp()
 {
 	position.y -= 10;
 }
 
-void Camera::moveDown()
+void Camera::MoveDown()
 {
 	position.y += 10;
 }
 
-void Camera::moveLeft()
+void Camera::MoveLeft()
 {
 	position.x -= 10;
 }
 
-void Camera::moveRight()
+void Camera::MoveRight()
 {
 	position.x += 10;
 }

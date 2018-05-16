@@ -2,15 +2,16 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include "Moveable.h"
 
 class Component;
 class InputComponent;
 
-class GameEntity : public sf::Drawable, public sf::Transformable
+class GameEntity : public sf::Drawable, public sf::Transformable, public Moveable
 {
 	public:
 		explicit GameEntity(const sf::Vector2f &position);
-		virtual ~GameEntity();
+		virtual ~GameEntity() = default;
 
 		virtual bool update() = 0;
 
@@ -27,10 +28,10 @@ class GameEntity : public sf::Drawable, public sf::Transformable
 
 		enum Direction { UP, DOWN, LEFT, RIGHT };
 
-		virtual void moveUp();
-		virtual void moveDown();
-		virtual void moveLeft();
-		virtual void moveRight();
+		void MoveUp() override;
+		void MoveDown() override;
+		void MoveLeft() override;
+		void MoveRight() override;
 
 		sf::RenderStates getRenderStates() const { return renderStates; }
 		sf::VertexArray getTextureBounds() const { return textureBounds; }
@@ -52,6 +53,6 @@ class GameEntity : public sf::Drawable, public sf::Transformable
 
 		sf::RenderStates renderStates;
 
-		InputComponent *inputComponent;
+		InputComponent* inputComponent;
 };
 

@@ -8,14 +8,12 @@ class GameEntity;
 class InputComponent : public Component
 {
 	public:
-		InputComponent(){}
+		InputComponent() = default;
 		explicit InputComponent(Input *i);
 		~InputComponent();
 
-		void update(GameEntity *e) override;
-
-		//I don't like this fix, but we'll come back to it later
-		void update(Camera *c) const;
+		void update(Moveable* e) const;
+		void update(GameEntity* e) override {};
 
 	private:
 		Input *i;

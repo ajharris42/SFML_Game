@@ -2,10 +2,11 @@
 
 #include "stdafx.h"
 #include "Graphics.h"
+#include "Moveable.h"
 
 class InputComponent;
 
-class Camera
+class Camera : Moveable
 {
 	public:
 		explicit Camera(InputComponent* i);
@@ -27,10 +28,10 @@ class Camera
 
 		enum Direction {UP, DOWN, LEFT, RIGHT};
 
-		void moveUp();
-		void moveDown();
-		void moveLeft();
-		void moveRight();
+		void MoveUp() override;
+		void MoveDown() override;
+		void MoveLeft() override;
+		void MoveRight() override;
 	private:
 		sf::Vector2f position;
 

@@ -12,8 +12,7 @@ class Input
 		static bool closeWindow();
 		static void pollEvents();
 
-		EntityCommand *getEntityInput();
-		CameraCommand *getCameraInput();
+		Command *getEntityInput();
 	private:
 		//@TODO:Being static is causing problems
 		static sf::RenderWindow *window;

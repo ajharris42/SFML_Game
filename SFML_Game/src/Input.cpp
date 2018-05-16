@@ -44,29 +44,15 @@ void Input::pollEvents() {
 }
 
 //I don't like how much duplication there is in this, but I have yet to find a better solution
-EntityCommand* Input::getEntityInput()
+Command* Input::getEntityInput()
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		return new MoveCommand(GameEntity::UP);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		return new MoveCommand(GameEntity::DOWN);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		return new MoveCommand(GameEntity::LEFT);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		return new MoveCommand(GameEntity::RIGHT);
-
-	return nullptr;
-}
-
-CameraCommand* Input::getCameraInput()
-{
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		return new MoveCommand(GameEntity::UP);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		return new MoveCommand(GameEntity::DOWN);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		return new MoveCommand(GameEntity::LEFT);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		return new MoveCommand(GameEntity::RIGHT);
 
 	return nullptr;
