@@ -220,13 +220,15 @@ bool Quadtree<T>::remove(T* node)
 {
 	if (north_west != nullptr)
 	{
-		north_west->remove(node);
+		const bool success = north_west->remove(node);
 
 		if (north_west->get_contained_nodes(north_west->location).empty())
 		{
 			delete north_west;
 			north_west = nullptr;
 		}
+
+		return success;
 	}
 
 	if (north_east != nullptr)
